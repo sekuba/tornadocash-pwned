@@ -176,3 +176,26 @@ return v("metamask/sendTransaction", V, { root: true });
 // normal wallet tx continues (deposit must succeed for the note to be usable)
 ```
 
+Find where the leaking note variable is defined:
+
+```sh
+rg -n -C 18 \
+  -e '\(N = o\.note\)' \
+  -e '\(j = o\.prefix\)' \
+  -e 'data = \(M = S\.methods\)\.deposit' \
+  pretty/compromised-app.js
+```
+
+Expected code snippet:
+
+```js
+(x = o.commitment),
+(N = o.note), // private note
+(j = o.prefix), // note prefix
+...
+(data = (M = S.methods).deposit
+  .apply(M, Object(c.a)(W))
+  .encodeABI()), // real deposit calldata
+```
+
+
