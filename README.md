@@ -1,6 +1,6 @@
 # TornadoCash gov / ipfs pwn review
 
-In early 2024, when TornadoCash was still [notorious and sanctioned](https://home.treasury.gov/news/press-releases/jy0916), it also got hacked. The official IPFS-served, [ENS-registered](https://etherscan.io/tx/0xd0702bce5e0608d042c7673bc382a605f7eb94dd354c36c56220b4238c1ab0d1/advanced#eventlog) frontend for `tornadocash.eth` exfiltrated private notes from users during deposit time for ~2 months.
+In early 2024, when TornadoCash was still [notorious and sanctioned](https://home.treasury.gov/news/press-releases/jy0916), it also got hacked. The official IPFS-served, [ENS-registered](https://etherscan.io/tx/0xd0702bce5e0608d042c7673bc382a605f7eb94dd354c36c56220b4238c1ab0d1/advanced#eventlog) frontend for `tornadocash.eth` exfiltrated private notes from users during deposit time for ~2 months. It was added in a regular governance proposal and was detected only after the proposal had succeeded. The TornadoCash core smart contracts (pools) are immutable, but the ipfs hash in the ENS contract is controlled by TORN token voting (DAO).
 
 This runbook let's you validate and understand the exploit in the verified IPFS frontend payloads. You fetch the required files from two TornadoCash frontend builds (onchain proposals 44 and 52) from a local IPFS node, prettify the bundled JavaScript, and spot the malicious diff.
 
